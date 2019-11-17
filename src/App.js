@@ -1,19 +1,20 @@
 import React from 'react';
-import './App.css';
-import Round from './Round';
-import dogAudio from './dog.mp3'
+import './App.css'
+import Item from './components/Item/Item'
+import barks from './assets/audio/dog.mp3'
+
 
 class App extends React.Component {
 
   state = {
-    randomIndex: 10,
-    counter: 0
+    counter: 0,
+    randomIndex: 3
   }
 
-  playDogAudio = React.createRef();
+  dogBarks = React.createRef()
 
   componentDidMount = () => {
-    setInterval(this.setRandomIndex, 2000)
+    setInterval(this.setRandomIndex, 2000);
   }
 
   setRandomIndex = () => {
@@ -22,9 +23,9 @@ class App extends React.Component {
     })
   }
 
-  incCounter = () => {
-    this.playDogAudio.current.currentTime = 0;
-    this.playDogAudio.current.play();
+  onClickDog = () => {
+    this.dogBarks.current.currentTime = 0;
+    this.dogBarks.current.play();
     this.setState({
       counter: this.state.counter + 1
     })
@@ -33,18 +34,15 @@ class App extends React.Component {
   item = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
   render = () => {
-
     return (
-      <div className="wrapper" >
-        <audio src={dogAudio} ref={this.playDogAudio}></audio>
+      <div className='wrapper'>
+        <audio src={barks} ref={this.dogBarks}></audio>
         {this.item.map(i =>
-          <Round key={i}
+          <Item key={i}
             index={i}
             randomIndex={this.state.randomIndex}
-            onClickHandler={this.incCounter}
-          />
-        )}
-        <div>
+            onClickDog={this.onClickDog} />)}
+        <div className='counter'>
           {this.state.counter}
         </div>
       </div>
