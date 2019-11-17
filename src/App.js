@@ -7,44 +7,41 @@ import barks from './assets/audio/dog.mp3'
 class App extends React.Component {
 
   state = {
-    counter: 0,
-    randomIndex: 3
+    items: [
+      { id: 0, isHidden: false },
+      { id: 1, isHidden: false },
+      { id: 2, isHidden: false },
+      { id: 3, isHidden: false },
+      { id: 4, isHidden: false },
+      { id: 5, isHidden: true },
+      { id: 6, isHidden: false },
+      { id: 7, isHidden: false },
+      { id: 8, isHidden: false }
+    ]
   }
-
-  dogBarks = React.createRef()
 
   componentDidMount = () => {
-    setInterval(this.setRandomIndex, 2000);
+    setInterval(this.getRandomImageId, 200);
   }
 
-  setRandomIndex = () => {
-    this.setState({
-      randomIndex: Math.floor(Math.random() * 9)
-    })
-  }
-
-  onClickDog = () => {
-    this.dogBarks.current.currentTime = 0;
-    this.dogBarks.current.play();
-    this.setState({
-      counter: this.state.counter + 1
-    })
-  }
-
-  item = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  // getRandomImageId = () => {
+  //   let randomImageId = Math.floor(Math.random() * 8);
+  //   let newItems = this.state.items.map(el => {
+  //     if (el.id === randomImageId) {
+  //       return { ...el, isHidden: true }
+  //     } else {
+  //       return { ...el, isHidden: false }
+  //     }
+  //   });
+  //   return newItems;
+  // };
 
   render = () => {
     return (
       <div className='wrapper'>
-        <audio src={barks} ref={this.dogBarks}></audio>
-        {this.item.map(i =>
-          <Item key={i}
-            index={i}
-            randomIndex={this.state.randomIndex}
-            onClickDog={this.onClickDog} />)}
-        <div className='counter'>
-          {this.state.counter}
-        </div>
+        {this.state.items.map(i =>
+          <Item id={i.id} isHidden={i.isHidden} />
+        )}
       </div>
     );
   }

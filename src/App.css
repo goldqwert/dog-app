@@ -1,10 +1,8 @@
-.wrapper {
-    width: 300px;
-    margin: 100px auto 10px auto;
+.counter {
     text-align: center;
 }
 
-.counter {
-    text-align: center;
-    font-size: 30px;
+.wrapper {
+    width: 170px;
+    margin: 100px auto 10px auto;
 }
